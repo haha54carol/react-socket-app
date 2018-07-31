@@ -10,21 +10,34 @@ const server = http.createServer(app)
 
 const io = socketIO(server)
 
-io.on('connection', client => {
-    console.log('User connected')
 
-    client.on('subscribeToTimer', (interval) => {
-        console.log('client is subscribing to timer with interval', interval)
+io.of('/Seconds').on('connect', socket => {
+    console.log('/Seconds on connected!')
 
-        setInterval(() => {
-            client.emit('timer', new Date());
-        }, interval);
+    setInterval(() => {
+        const sec = new Date()
+        socket.emit('Seconds', sec.getSeconds());
+    }, 1000)
+
+    socket.on('disconnect', () => {
+        console.log('/Seconds, disconnect')
+    })
+})
+
+
+
+io.of('/TwoSeconds').on('connect', socket => {
+    console.log('/TwoSeconds on connected!')
+
+    setInterval(() => {
+        const sec = new Date()
+        socket.emit('TwoSeconds', sec.getSeconds());
+    }, 2000)
+
+    socket.on('disconnect', () => {
+        console.log('/TwoSeconds, disconnect')
     })
 
-
-    client.on('disconnect', () => {
-        console.log('user disconnected')
-    })
 })
 
 
