@@ -36,7 +36,13 @@ button {
   outline:none;
 }
 
-button:hover{
+button:disabled{
+  background-color: gainsboro;
+  border: 1px solid gainsboro;
+  color: white;
+}
+
+button:hover:enabled{
   background-color: powderblue;
   color: #fff;
 }
