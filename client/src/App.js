@@ -53,12 +53,10 @@ class App extends Component {
 
         <p>Seconds : {seconds}</p>
         <button onClick={() => this.connectSocket('Seconds')}>Connect Socket</button>
-        <button onClick={() => this.disconnectSocket('Seconds')}>Disconnect Socket</button>
-
+        <button disabled={!this.state['Seconds']} onClick={() => this.disconnectSocket('Seconds')}>Disconnect Socket</button>
         <p>2 Seconds : {twoSeconds}</p>
         <button onClick={() => this.connectSocket('TwoSeconds')}>Connect Socket</button>
-        <button onClick={() => this.disconnectSocket('TwoSeconds')}>Disconnect Socket</button>
-
+        <button disabled={!this.state['TwoSeconds']} onClick={() => this.disconnectSocket('TwoSeconds')}>Disconnect Socket</button>
       </div>
     );
   }
