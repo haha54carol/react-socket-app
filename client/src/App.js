@@ -30,14 +30,14 @@ class App extends Component {
   }
 
   connectSocket(namespace, room) {
-    if (this.state[namespace]) {
-      this.state[namespace].subscribe(data => this.updateProps({ data, namespace }))
-    } else {
+    if (!this.state[namespace]) {
       Promise.resolve(
         this.setState({ [namespace]: new SocketClient(namespace, room) })
       ).then(() => {
         this.state[namespace].subscribe(data => this.updateProps({ data, namespace }))
       })
+    } else {
+      this.state[namespace].subscribe(data => this.updateProps({ data, namespace }))
     }
   }
 
