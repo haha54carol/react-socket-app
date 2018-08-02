@@ -9,9 +9,8 @@ class App extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      Seconds: null
-    }
+    this.state = {}
+
     this.connectSocket = this.connectSocket.bind(this)
     this.disconnectSocket = this.disconnectSocket.bind(this)
     this.updateProps = this.updateProps.bind(this)
