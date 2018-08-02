@@ -26,3 +26,17 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+button {
+  background-color: #fff;
+  border: 1px solid powderblue;
+  height: 30px;
+  border-radius: 20px;
+  color: powderblue;
+  outline:none;
+}
+
+button:hover{
+  background-color: powderblue;
+  color: #fff;
+}

@@ -10,7 +10,7 @@ const seconds = (state = 'no timer', action) => {
     }
 }
 
-const twoSeconds = (state = 'no 2 sec timer', action) => {
+const twoSeconds = (state = 'no timer', action) => {
     switch (action.type) {
         case "update_2seconds":
             return action.payload
@@ -20,8 +20,11 @@ const twoSeconds = (state = 'no 2 sec timer', action) => {
 }
 
 
+
+
 const root = combineReducers({
-    seconds, twoSeconds
+    seconds,
+    twoSeconds
 })
 
 export default root

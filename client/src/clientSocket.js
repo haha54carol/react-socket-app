@@ -2,39 +2,18 @@ import io from 'socket.io-client'
 const url = 'http://localhost:4000'
 
 
-let secondsSocket, twoSencondsSocket
-
-const subscribeToSeconds = (fn) => {
-    if (!secondsSocket) {
-        secondsSocket = io(`${url}/Seconds`)
+export default class SocketClient {
+    constructor(namespace) {
+        this.namespace = namespace || null
+        this.socket = io(`${url}/${namespace}`)
     }
 
-    secondsSocket.on('Seconds', sec => fn(sec))
-}
-
-const unsubscribeToSeconds = () => {
-    secondsSocket.disconnect()
-    secondsSocket = null
-}
-
-const subscribeToTwoSeconds = (fn) => {
-    if (!twoSencondsSocket) {
-        twoSencondsSocket = io(`${url}/TwoSeconds`)
+    subscribe(fn) {
+        this.socket.on(this.namespace, data => fn(data))
     }
 
-    twoSencondsSocket.on('TwoSeconds', sec => fn(sec))
+    unsubscribe() {
+        this.socket.disconnect()
+    }
 }
 
-const unsubscribeToTwoSeconds = () => {
-    twoSencondsSocket.disconnect()
-    twoSencondsSocket = null
-}
-
-
-
-export default {
-    subscribeToSeconds,
-    unsubscribeToSeconds,
-    subscribeToTwoSeconds,
-    unsubscribeToTwoSeconds
-}

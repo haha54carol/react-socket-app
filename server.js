@@ -20,7 +20,7 @@ io.of('/Seconds').on('connect', socket => {
     }, 1000)
 
     socket.on('disconnect', () => {
-        console.log('/Seconds, disconnect')
+        console.log('/Seconds disconnect')
     })
 })
 
@@ -35,7 +35,7 @@ io.of('/TwoSeconds').on('connect', socket => {
     }, 2000)
 
     socket.on('disconnect', () => {
-        console.log('/TwoSeconds, disconnect')
+        console.log('/TwoSeconds disconnect')
     })
 
 })

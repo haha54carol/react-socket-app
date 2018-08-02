@@ -10,5 +10,6 @@ const update2Seconds = (payload) => ({
 
 
 export {
-    updateSeconds, update2Seconds
+    updateSeconds,
+    update2Seconds,
 }
