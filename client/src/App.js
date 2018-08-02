@@ -8,7 +8,6 @@ class App extends Component {
 
   constructor(props) {
     super(props)
-
     this.state = {}
 
     this.connectSocket = this.connectSocket.bind(this)
@@ -28,10 +27,10 @@ class App extends Component {
 
   }
 
-  connectSocket(namespace, room) {
+  connectSocket(namespace) {
     if (!this.state[namespace]) {
       Promise.resolve(
-        this.setState({ [namespace]: new SocketClient(namespace, room) })
+        this.setState({ [namespace]: new SocketClient(namespace) })
       ).then(() => {
         this.state[namespace].subscribe(data => this.updateProps({ data, namespace }))
       })
