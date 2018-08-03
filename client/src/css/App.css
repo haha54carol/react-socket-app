@@ -1,30 +1,76 @@
+
+@media only screen 
+  and (min-device-width:900px)
+  {
+
+.chatList{
+  height: 100%;
+  width: 260px;
+}
+
+.chatRoom{
+  height: 100%;
+  width: calc(100% - 280px);
+  }
+}
+
+@media only screen 
+  and (max-device-width:900px)
+  {
+
+.chatList{
+  height: 100%;
+  width: 120px;
+  
+}
+
+.chatRoom{
+  height: 100%;
+  width: calc(100% - 135px);
+  }
+}
+
+/* ---------------------------------------------- */
 .App {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.container{
+  height: 100vh;
+  position: relative;
+  display: -webkit-box;
+  background-color: rgb(24, 30, 36);
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.chatList{
+  background-color: rgb(40, 51, 63);
+  border-radius: 10px;
+}
+.chatList__header{
+  height: 45px;
+  border-bottom: rgb(75, 88, 102) 1px solid;
+  font-weight: bold;
+  line-height: 45px;
+  color:rgb(71, 160, 255);
 }
 
-.App-title {
-  font-size: 1.5em;
+.chatList__item{
+  height: 45px;
+  color:rgb(142, 152, 162);
+  line-height: 45px;
+  padding-left: 15px;
+}
+.chatList__item:hover{
+  color: #fff;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.chatRoom{
+  position: absolute;
+  top:0px;
+  right: 0px;
+  background-color: rgb(40, 51, 63);
+  color: rgb(142, 152, 162);
+  border-radius: 10px;
 }
 
 button {
@@ -46,3 +92,4 @@ button:hover:enabled{
   background-color: powderblue;
   color: #fff;
 }
+
