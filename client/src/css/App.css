@@ -33,13 +33,13 @@
 /* ---------------------------------------------- */
 .App {
   text-align: center;
+  
 }
 
 .container{
   height: 100vh;
   position: relative;
   display: -webkit-box;
-  background-color: rgb(24, 30, 36);
 }
 
 .chatList{
@@ -48,10 +48,10 @@
 }
 .chatList__header{
   height: 45px;
-  border-bottom: rgb(75, 88, 102) 1px solid;
   font-weight: bold;
   line-height: 45px;
   color:rgb(71, 160, 255);
+  padding-left: 10px;
 }
 
 .chatList__item{
@@ -59,6 +59,7 @@
   color:rgb(142, 152, 162);
   line-height: 45px;
   padding-left: 15px;
+  text-decoration: none;
 }
 .chatList__item:hover{
   color: #fff;
@@ -71,6 +72,30 @@
   background-color: rgb(40, 51, 63);
   color: rgb(142, 152, 162);
   border-radius: 10px;
+}
+
+.chatRoom__msg{
+  color: #fff;
+  font-size: 20px;
+}
+
+.tagsBar{
+  height: 40px;
+  padding: 10px;
+  position: absolute;
+  bottom: 50px;
+}
+
+.tagsBar__messageTag{
+  display: inline;
+  min-width: 50px;
+  height: 30px;
+  color:rgb(71, 160, 255);
+  border:rgb(71, 160, 255) 1px solid;
+  border-radius: 30px;
+  padding: 5px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 button {
@@ -92,4 +117,6 @@ button:hover:enabled{
   background-color: powderblue;
   color: #fff;
 }
+
+
 

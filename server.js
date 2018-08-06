@@ -7,41 +7,35 @@ const app = express()
 const server = http.createServer(app)
 const io = socketIO(server)
 
-// io.on('connection', socket => {
-//     // socket.join('room', () => {
-//     //     console.log('join room')
-//     //     io.to('room').emit('send from room', '....')
-//     // })
-//     console.log('User on connected!')
 
-//     socket.on('join room', room => {
-//         socket.join(room, () => {
-//             console.log('join a room: ' + room)
-//         })
-//     })
+const response = (data) => {
+    switch (data) {
+        case 'Hi Mom!':
+            return 'Hi sweety!'
+        case 'Did you see my skirt?':
+            return 'It\'s in your bag.'
+        case 'Thanks':
+            return 'You are welcome.'
+        default:
+            return 'Bye.'
+    }
+}
 
-//     socket.on('get msg from room', room => {
-//         io.in(room).emit('event', `send msg to ${room}`)
-//     })
-
-//     socket.on('disconnect', () => {
-//         console.log('disconnect')
-//     })
-// })
 
 io.on('connection', socket => {
-    socket.on('enter room', room => {
-        socket.join(room, () => {
-            console.log('join a room:' + room)
-        })
-    })
+    console.log('on connection...')
 
-    socket.on('send to', (room, msg) => {
-        io.in(room).emit('private-message', msg)
-    })
+    let room = socket.handshake.query.room;
+    if (room) {
+        socket.join(room)
+    }
 
-    socket.on('leave room', room => {
-        socket.leave(room)
+    socket.on(`chatRoom_${room}`, data => {
+        io.in(room).emit(room, data)
+
+        setTimeout(() => {
+            io.in(room).emit(room, { message: response(data.message), user: 'Mom' })
+        }, 500)
     })
 
     socket.on('disconnect', () => {
@@ -49,21 +43,22 @@ io.on('connection', socket => {
     })
 })
 
-io.of('/family').on('connection', socket => {
-    console.log('connected to family')
 
-    socket.on('typing', (people) => {
-        socket.emit('typing', `${people} is typing`)
-    })
+// io.of('/family').on('connection', socket => {
+//     console.log('connected to family')
 
-    socket.on('send message', msg => {
-        socket.emit('family message', msg)
-    })
+//     socket.on('typing', (people) => {
+//         socket.emit('typing', `${people} is typing`)
+//     })
 
-    socket.on('disconnect', () => {
-        console.log('disconnect from family')
-    })
-})
+//     socket.on('send message', msg => {
+//         socket.emit('family message', msg)
+//     })
+
+//     socket.on('disconnect', () => {
+//         console.log('disconnect from family')
+//     })
+// })
 
 
 // io.of('/Seconds').on('connection', socket => {
@@ -79,21 +74,6 @@ io.of('/family').on('connection', socket => {
 //     })
 // })
 
-
-
-// io.of('/TwoSeconds').on('connection', socket => {
-//     console.log('/TwoSeconds on connected!')
-
-//     setInterval(() => {
-//         const sec = new Date()
-//         socket.emit('TwoSeconds', sec.getSeconds());
-//     }, 2000)
-
-//     socket.on('disconnect', () => {
-//         console.log('/TwoSeconds disconnect')
-//     })
-
-// })
 
 
 server.listen(port, (err) => {
