@@ -22,7 +22,7 @@ class List extends Component {
                     </Link>
                 )}
                 <div className="chatList__header">
-                    Direct Message
+                    Direct Message (on line)
                 </div>
                 {this.state.directs.map(roomName =>
                     <Link key={`room_${roomName}`} to={`/rooms/${roomName}`} className="chatList__item">
