@@ -7,41 +7,62 @@ const app = express()
 const server = http.createServer(app)
 const io = socketIO(server)
 
-
-const response = (data) => {
-    switch (data) {
-        case 'Hi Mom!':
-            return 'Hi sweety!'
-        case 'Did you see my skirt?':
-            return 'It\'s in your bag.'
-        case 'Thanks':
-            return 'You are welcome.'
-        default:
-            return 'Bye.'
-    }
-}
-
-
 io.on('connection', socket => {
-    console.log('on connection...')
+    console.log('user on connection!')
 
-    let room = socket.handshake.query.room;
-    if (room) {
-        socket.join(room)
-    }
+    io.sockets.emit('enterRoom', 'hi hi')
 
-    socket.on(`chatRoom_${room}`, data => {
-        io.in(room).emit(room, data)
+    // socket.on('enter', people => {
+    //     console.log('** [enter] **')
+    //     io.sockets.emit('enterRoom', people)
+    // })
 
-        setTimeout(() => {
-            io.in(room).emit(room, { message: response(data.message), user: 'Mom' })
-        }, 500)
+    socket.on('message', msgObj => {
+        console.log('** [message] **')
+        io.sockets.emit('clientMessage', msgObj)
     })
-
     socket.on('disconnect', () => {
-        console.log('disconnect')
+        console.log('user disconnect!')
     })
 })
+
+
+
+//
+// const response = (data) => {
+//     switch (data) {
+//         case 'Hi Mom!':
+//             return 'Hi sweety!'
+//         case 'Did you see my skirt?':
+//             return 'It\'s in your bag.'
+//         case 'Thanks':
+//             return 'You are welcome.'
+//         default:
+//             return 'Bye.'
+//     }
+// }
+//
+//
+// io.on('connection', socket => {
+//     console.log('on connection...')
+//
+//     let room = socket.handshake.query.room;
+//     if (room) {
+//         socket.join(room)
+//     }
+//
+//     socket.on(`chatRoom_${room}`, data => {
+//         io.in(room).emit(room, data)
+//
+//         setTimeout(() => {
+//             io.in(room).emit(room, { message: response(data.message), user: 'Mom' })
+//         }, 500)
+//     })
+//
+//     socket.on('disconnect', () => {
+//         console.log('disconnect')
+//     })
+// })
 
 
 // io.of('/family').on('connection', socket => {

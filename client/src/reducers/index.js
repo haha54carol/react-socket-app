@@ -1,5 +1,6 @@
 
 import { combineReducers } from 'redux'
+import availablePokemon from './pokemon'
 
 const seconds = (state = 'no timer', action) => {
     switch (action.type) {
@@ -24,7 +25,8 @@ const twoSeconds = (state = 'no timer', action) => {
 
 const root = combineReducers({
     seconds,
-    twoSeconds
+    twoSeconds,
+    availablePokemon
 })
 
 export default root

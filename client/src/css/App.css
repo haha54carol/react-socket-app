@@ -118,5 +118,25 @@ button:hover:enabled{
   color: #fff;
 }
 
+/* pokemon chat room*/
+.user{
+  height: 30px;
+}
 
+.avatar{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
 
+.userName{
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.grayscale {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  opacity: 0.5;
+}

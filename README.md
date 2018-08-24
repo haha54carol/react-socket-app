@@ -2,24 +2,25 @@
 
 still working on ...
 
-### ToDo
-> Light theme / Dark theme
+chat room...
 
 
-> Namespace
-* family group
-* member: Mom, Dad, Mary and You
+1. choose active charactor , once pick up disable to choose
 
-> Room
-* one to one
+pikacu
 
--------------
-    |
-    |
-    |
-    |
-    |
-    |
+dragon
+
+meowa seed
+
+turtle
+
+2. --- enter room ---
+
+system message : welcome "who" enter room
+
+3. start to chat
+
 
 
 

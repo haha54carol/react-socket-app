@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import SocketClient from '../clientSocket'
+import SocketClient from '../socket'
 
 class Rooms extends Component {
     constructor(props) {
