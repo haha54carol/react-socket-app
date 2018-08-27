@@ -7,24 +7,31 @@ class UserComp extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            user: null
+            user: null,
+            showModal: true
         }
     }
 
     render() {
-        const {pokemons, show, emitToServer} = this.props
-        const {user} = this.state
+        const {pokemons, emitToServer} = this.props
+        const {user, showModal} = this.state
         const users = Object.keys(pokemons)
 
 
         return (
             <div>
-                <Modal open={true}>
+                <Modal open={showModal}>
                     <Modal.Header>Select a Role.</Modal.Header>
                     <Modal.Content>
                         {users.map(userName =>
-                                <span key={`key_${userName}`} style={{marginRight: 10}} onClick={() => this.setState({user: userName})}>
-                                    <Label className={pokemons[userName] ? null : 'inactiveLabel'} image>
+                                <span key={`key_${userName}`}
+                                      style={{marginRight: 10}}
+                                      onClick={() => {
+                                        if(pokemons[userName]){
+                                            this.setState({user: userName})
+                                      }
+                                }}>
+                                    <Label className={pokemons[userName] ? null : 'inactiveLabel'} color={user === userName ? 'red': null} image>
                                         <img src={`/images/${userName}.jpg`}/>
                                         {userName}
                                     </Label>
@@ -32,7 +39,13 @@ class UserComp extends Component {
                         )}
                     </Modal.Content>
                     <Modal.Actions>
-                        <Button color='black' onClick={() => emitToServer('enterRoom', user)}>Confirm</Button>
+                        <Button color='black' onClick={() => {
+                            if(user){
+                                emitToServer('enterRoom', user)}
+                                this.setState({
+                                    showModal: false
+                                })
+                            }}>Confirm</Button>
                     </Modal.Actions>
                 </Modal>
             </div>
@@ -51,8 +64,7 @@ class UserComp extends Component {
 
 const mapS2P = state => {
     return {
-        pokemons: state.availablePokemon,
-        show: state.showModal
+        pokemons: state.availablePokemon
     }
 }
 

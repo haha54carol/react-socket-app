@@ -3,12 +3,7 @@ const onEnterRoom = (payload) => ({
     payload
 })
 
-const closeModal = () => ({
-    type: 'CLOSE_MODAL'
-})
-
 
 export default {
-    onEnterRoom,
-    closeModal
+    onEnterRoom
 }
