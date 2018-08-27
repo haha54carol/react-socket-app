@@ -24,7 +24,7 @@ class UserComp extends Component {
                     <Modal.Content>
                         {users.map(userName =>
                                 <span key={`key_${userName}`} style={{marginRight: 10}} onClick={() => this.setState({user: userName})}>
-                                    <Label active={pokemons[userName]} color={user === userName? 'yellow': null} image>
+                                    <Label className={pokemons[userName] ? null : 'inactiveLabel'} image>
                                         <img src={`/images/${userName}.jpg`}/>
                                         {userName}
                                     </Label>
