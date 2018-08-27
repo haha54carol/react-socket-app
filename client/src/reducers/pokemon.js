@@ -1,4 +1,3 @@
-
 const initState = {
     Pikachu: true,
     Charmander:true,
@@ -8,12 +7,12 @@ const initState = {
 
 const availablePokemon = (state = initState, action) =>{
     switch (action.type){
-        case 'SELECTEDUSER':
+        case 'USER_ENTER_ROOM':
             return {...state, [action.payload]:false}
-
        default:
            return state
     }
 }
+
 
 export default availablePokemon

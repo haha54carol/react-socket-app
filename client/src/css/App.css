@@ -140,3 +140,7 @@ button:hover:enabled{
   filter: grayscale(100%);
   opacity: 0.5;
 }
+
+.inactiveLabel{
+  text-decoration: line-through;
+}

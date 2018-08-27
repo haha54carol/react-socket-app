@@ -10,12 +10,10 @@ const io = socketIO(server)
 io.on('connection', socket => {
     console.log('user on connection!')
 
-    io.sockets.emit('enterRoom', 'hi hi')
-
-    // socket.on('enter', people => {
-    //     console.log('** [enter] **')
-    //     io.sockets.emit('enterRoom', people)
-    // })
+    socket.on('enterRoom', people => {
+        console.log('** [enter] **')
+        io.sockets.emit('enterRoom', people)
+    })
 
     socket.on('message', msgObj => {
         console.log('** [message] **')

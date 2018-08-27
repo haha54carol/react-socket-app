@@ -1,15 +1,14 @@
-const updateSeconds = (payload) => ({
-    type: 'update_seconds',
+const onEnterRoom = (payload) => ({
+    type: 'USER_ENTER_ROOM',
     payload
 })
 
-const update2Seconds = (payload) => ({
-    type: 'update_2seconds',
-    payload
+const closeModal = () => ({
+    type: 'CLOSE_MODAL'
 })
 
 
-export {
-    updateSeconds,
-    update2Seconds,
+export default {
+    onEnterRoom,
+    closeModal
 }

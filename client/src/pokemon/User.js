@@ -1,121 +1,63 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import SocketClient from '../socket'
-import SocketHOC from './socketHOC'
+import React, {Component} from 'react'
+import SocketHOC from '../hoc/socketHOC'
+import {connect} from 'react-redux'
+import {Label, Modal, Button} from 'semantic-ui-react'
 
-const ChatRoom = ({userName, msg}) => <div>{userName} : {msg}</div>
-
-const Avatar = ({ userName, available, selectUser }) =>
-    <div className="user" onClick={() => selectUser(userName)}>
-        <img src={`/images/${userName}.jpg`} className={`avatar ${available ? '' : 'grayscale'}`} />
-        <div className="userName">{userName}</div>
-    </div>
-
-// class User extends Component {
-//     constructor(props) {
-//         super(props)
-//         this.state = {
-//             charactor: {
-//                 Pikachu: {
-//                     available: true
-//                 },
-//                 Charmander: {
-//                     available: true
-//                 },
-//                 Bulbasaur: {
-//                     available: true
-//                 },
-//                 Squirtle: {
-//                     available: true
-//                 }
-//             },
-//             userName: null,
-//             socketCleint: new SocketClient()
-//         }
-//
-//         this.updateUserStatus = this.updateUserStatus.bind(this)
-//         this.selectUser = this.selectUser.bind(this)
-//     }
-//
-//     componentDidMount(){
-//         this.state.socketCleint.onEnterRoom(user => {
-//             this.updateUserStatus(user)
-//         })
-//     }
-//
-//     updateUserStatus(user){
-//         this.setState((pre) => {
-//             return pre.charactor[user].available = false
-//         })
-//
-//         this.setState({
-//             userName: user
-//         })
-//     }
-//
-//     selectUser(user){
-//         this.state.socketCleint.emitEvent('enter', user)
-//     }
-//     componentWillUnmount(){
-//         this.state.socketCleint.disconnectSocket()
-//     }
-//
-//
-//     render() {
-//         const { charactor, userName } = this.state
-//         return (
-//             <div>
-//
-//                 { userName ? <ChatRoom userName={userName} msg="hello !" /> :
-//                     Object.keys(charactor).map(user =>
-//                         <Avatar userName={user}
-//                             key={user}
-//                             available={charactor[user].available}
-//                             selectUser={this.selectUser}
-//                         />
-//                     )
-//                 }
-//             </div>
-//         )
-//     }
-// }
-
-class UserComp extends Component{
-    constructor(props){
+class UserComp extends Component {
+    constructor(props) {
         super(props)
         this.state = {
-            character: {
-                Pikachu: {
-                    available: true
-                },
-                Charmander: {
-                    available: true
-                },
-                Bulbasaur: {
-                    available: true
-                },
-                Squirtle: {
-                    available: true
-                }
-            },
-            user: null,
+            user: null
         }
     }
 
-    componentDidMount(){
+    render() {
+        const {pokemons, show, emitToServer} = this.props
+        const {user} = this.state
+        const users = Object.keys(pokemons)
 
-    }
 
-    render(){
-        const {socketData} = this.props
         return (
-            <div>{socketData}</div>
+            <div>
+                <Modal open={true}>
+                    <Modal.Header>Select a Role.</Modal.Header>
+                    <Modal.Content>
+                        {users.map(userName =>
+                                <span key={`key_${userName}`} style={{marginRight: 10}} onClick={() => this.setState({user: userName})}>
+                                    <Label active={pokemons[userName]} color={user === userName? 'yellow': null} image>
+                                        <img src={`/images/${userName}.jpg`}/>
+                                        {userName}
+                                    </Label>
+                                </span>
+                        )}
+                    </Modal.Content>
+                    <Modal.Actions>
+                        <Button color='black' onClick={() => emitToServer('enterRoom', user)}>Confirm</Button>
+                    </Modal.Actions>
+                </Modal>
+            </div>
         )
+
+        // return (
+        //    display ?
+        //     <div >
+        //         {users.map(user =>
+        //             <Avatar key={`key_${user}`} userName={user} available={pokemons[user]} selectedUser={emitToServer} />
+        //         )}
+        //     </div> : null
+        // )
     }
 }
-const User = SocketHOC(UserComp, 'onEnterRoom')
+
+const mapS2P = state => {
+    return {
+        pokemons: state.availablePokemon,
+        show: state.showModal
+    }
+}
 
 
-User.propTypes = {};
+const SocketComp = SocketHOC(UserComp, 'onEnterRoom')
+const User = connect(mapS2P)(SocketComp)
 
-export default User;
+export default User

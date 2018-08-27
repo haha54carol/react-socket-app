@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import SocketClient from '../socket'
-
+import store from '../store'
+import actions from '../actions/action'
 
 function withSocketClient(WrappedComponent, eventFunction){
     return class extends Component{
@@ -11,14 +12,18 @@ function withSocketClient(WrappedComponent, eventFunction){
                 socketCleint: new SocketClient(),
                 socketData: null
             }
+
+            this.emitToServer = this.emitToServer.bind(this)
         }
 
         componentDidMount(){
             this.state.socketCleint[eventFunction](data =>{
-                this.setState({
-                    socketData:data
-                })
+                store.dispatch(actions[eventFunction](data))
             })
+        }
+
+        emitToServer(event, msg){
+            this.state.socketCleint.emitEvent(event, msg)
         }
 
         componentWillUnmount(){
@@ -26,7 +31,7 @@ function withSocketClient(WrappedComponent, eventFunction){
         }
 
         render(){
-            return <WrappedComponent socketData={this.state.socketData} {...this.props} />
+            return <WrappedComponent socketData={this.state.socketData} emitToServer={this.emitToServer} {...this.props} />
         }
     }
 }
