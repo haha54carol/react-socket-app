@@ -5,11 +5,11 @@ import 'semantic-ui-css/semantic.min.css';
 import List from './components/list'
 import Channels from './components/channels'
 import Rooms from './components/rooms'
-import User from './pokemon/User'
-
+//import User from './pokemon/user'
+import AppComp from './pokemon/index'
 const App = () => (
   <Router>
-      <User />
+      <AppComp />
   </Router>
 )
 

@@ -3,7 +3,7 @@ import SocketClient from '../socket'
 import store from '../store'
 import actions from '../actions/action'
 
-function withSocketClient(WrappedComponent, eventFunction){
+function withSocketClient(WrappedComponent, eventFunction, passDataByProps = false){
     return class extends Component{
         constructor(props){
             super(props)
@@ -18,8 +18,13 @@ function withSocketClient(WrappedComponent, eventFunction){
 
         componentDidMount(){
             this.state.socketCleint[eventFunction](data =>{
-                store.dispatch(actions[eventFunction](data))
-            })
+                if(passDataByProps){
+                    this.setState({
+                        socketData:data
+                    })
+                }else {
+                    store.dispatch(actions[eventFunction](data))
+                }})
         }
 
         emitToServer(event, msg){
@@ -31,7 +36,10 @@ function withSocketClient(WrappedComponent, eventFunction){
         }
 
         render(){
-            return <WrappedComponent socketData={this.state.socketData} emitToServer={this.emitToServer} {...this.props} />
+            return <WrappedComponent
+                socketData={this.state.socketData}
+                emitToServer={this.emitToServer} {...this.props}
+            />
         }
     }
 }

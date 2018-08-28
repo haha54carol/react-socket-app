@@ -144,3 +144,9 @@ button:hover:enabled{
 .inactiveLabel{
   text-decoration: line-through;
 }
+
+.chatRoom__textArea{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}

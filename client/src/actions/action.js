@@ -3,7 +3,13 @@ const onEnterRoom = (payload) => ({
     payload
 })
 
+const setUser = (payload) => ({
+    type: 'SET_USER',
+    payload
+})
+
 
 export default {
-    onEnterRoom
+    onEnterRoom,
+    setUser
 }

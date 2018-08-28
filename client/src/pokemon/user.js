@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import SocketHOC from '../hoc/socketHOC'
 import {connect} from 'react-redux'
-import {Label, Modal, Button} from 'semantic-ui-react'
+import action from '../actions/action'
+import {Label, Modal, Button, Grid, Segment } from 'semantic-ui-react'
 
 class UserComp extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ class UserComp extends Component {
     }
 
     render() {
-        const {pokemons, emitToServer} = this.props
+        const {pokemons, emitToServer, setUser} = this.props
         const {user, showModal} = this.state
         const users = Object.keys(pokemons)
 
@@ -24,7 +25,7 @@ class UserComp extends Component {
                     <Modal.Header>Select a Role.</Modal.Header>
                     <Modal.Content>
                         {users.map(userName =>
-                                <span key={`key_${userName}`}
+                            <span key={`key_${userName}`}
                                       style={{marginRight: 10}}
                                       onClick={() => {
                                         if(pokemons[userName]){
@@ -39,26 +40,18 @@ class UserComp extends Component {
                         )}
                     </Modal.Content>
                     <Modal.Actions>
-                        <Button color='black' onClick={() => {
+                        <Button color='blue' onClick={() => {
                             if(user){
-                                emitToServer('enterRoom', user)}
+                                emitToServer('enterRoom', user)
+                                setUser(user)
                                 this.setState({
                                     showModal: false
-                                })
-                            }}>Confirm</Button>
+                                })}
+                            }}>Start To Chat!</Button>
                     </Modal.Actions>
                 </Modal>
             </div>
         )
-
-        // return (
-        //    display ?
-        //     <div >
-        //         {users.map(user =>
-        //             <Avatar key={`key_${user}`} userName={user} available={pokemons[user]} selectedUser={emitToServer} />
-        //         )}
-        //     </div> : null
-        // )
     }
 }
 
@@ -68,8 +61,15 @@ const mapS2P = state => {
     }
 }
 
+const mapD2P = dispatch =>{
+    return {
+        setUser: (user) =>{
+            return dispatch(action.setUser(user))
+        }
+    }
+}
 
 const SocketComp = SocketHOC(UserComp, 'onEnterRoom')
-const User = connect(mapS2P)(SocketComp)
+const User = connect(mapS2P,mapD2P)(SocketComp)
 
 export default User
