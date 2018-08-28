@@ -147,6 +147,6 @@ button:hover:enabled{
 
 .chatRoom__textArea{
   position: fixed;
-  bottom: 0;
+  bottom: 10px;
   left: 0;
 }

@@ -1,23 +1,18 @@
 import React, { Component } from 'react'
 import SocketHOC from '../hoc/socketHOC'
 import { connect } from 'react-redux'
-import {Label, Icon,  Form, Input, Container, Button} from 'semantic-ui-react'
+import {Label, Icon,  Form, Input, Container, Grid} from 'semantic-ui-react'
 
 const MessageInputBox = ({onEnter}) =>{
     return(
-        <Form>
-            <div>
-                <Input size='big'
-                       icon='send'
-                       action={{ icon: 'search' }}
-                       placeholder='Press Enter to Send Message...'
-                       onKeyPress={onEnter}
-                       style={{position: 'fixed', bottom: 0, left:0, width: '100%'}}
-                />
-            </div>
-        </Form>
+            <Input size='big'
+                    icon='send'
+                    placeholder='Press Enter to Send Message...'
+                    onKeyPress={onEnter}
+                    style={{position: 'fixed', bottom: 0, left:0, width: '100%'}}
+            />
     )
-}
+} 
 
 class ChatRoomComp extends Component{
     constructor(props){
@@ -53,11 +48,23 @@ class ChatRoomComp extends Component{
 
     render(){
         const {messages} = this.state
+        const {user:selectedUser}= this.props
         return(
             <Container fluid>
+        <Grid>
                 {messages.map((m, idx) =>{
-                   return <div key={idx}>{m.user}:{m.message}</div>
+                   return (
+                       <Grid.Row columns="1">
+                       <Grid.Column
+                       floated={`${selectedUser == m.user ? "right": "left"}`}
+                       textAlign={`${selectedUser == m.user ? "right": "left"}`}>
+                            <div key={idx}>{m.user}:{m.message}</div>
+                        </Grid.Column>
+                        </Grid.Row>
+                   )
+                   
                 })}
+                </Grid>
                 <MessageInputBox onEnter={this.onEnter} />
             </Container>
         )
