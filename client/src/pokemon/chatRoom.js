@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SocketHOC from '../hoc/socketHOC'
 import { connect } from 'react-redux'
-import {Label, Icon,  Form, Input, Container, Grid} from 'semantic-ui-react'
+import {Label, Icon,  Image, Input, Container, Grid} from 'semantic-ui-react'
 
 const MessageInputBox = ({onEnter}) =>{
     return(
@@ -58,7 +58,9 @@ class ChatRoomComp extends Component{
                        <Grid.Column
                        floated={`${selectedUser == m.user ? "right": "left"}`}
                        textAlign={`${selectedUser == m.user ? "right": "left"}`}>
-                            <div key={idx}>{m.user}:{m.message}</div>
+                            <div key={idx}>
+                                <Image src={`/images/${m.user}.jpg`} size="mini"/>
+                            </div>
                         </Grid.Column>
                         </Grid.Row>
                    )
