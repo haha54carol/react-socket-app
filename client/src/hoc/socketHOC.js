@@ -17,6 +17,7 @@ function withSocketClient(WrappedComponent, eventFunction, passDataByProps = fal
         }
 
         componentDidMount(){
+
             this.state.socketCleint[eventFunction](data =>{
                 if(passDataByProps){
                     this.setState({

@@ -56,11 +56,11 @@ class ChatRoomComp extends Component{
                    return (
                        <Grid.Row columns="1">
                        <Grid.Column
-                       floated={`${selectedUser == m.user ? "right": "left"}`}
-                       textAlign={`${selectedUser == m.user ? "right": "left"}`}>
-                            <div key={idx}>
-                                <Image src={`/images/${m.user}.jpg`} size="mini"/>
-                            </div>
+                       floated={`${selectedUser === m.user ? "right": "left"}`}
+                       textAlign={`${selectedUser === m.user ? "right": "left"}`}>
+                           {m.user}:{m.message}
+                                {/*<Image src={`/images/${m.user}.jpg`} size="mini"/>*/}
+
                         </Grid.Column>
                         </Grid.Row>
                    )

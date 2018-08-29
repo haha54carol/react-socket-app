@@ -1,4 +1,4 @@
-const initState = {
+let initState = {
     Pikachu: true,
     Charmander:true,
     Bulbasaur: true,
