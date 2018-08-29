@@ -61,11 +61,11 @@ class ChatRoomComp extends Component{
                            textAlign={position}>
                                {
                                    position === 'right' ? <Form.Field inline>
-                                       <Label pointing={position}>{m.message}</Label>
-                                       <Image avatar src={`/images/${m.user}.jpg`} size="mini" spaced='left'/>
+                                       <Label size="massive" pointing={position}>{m.message}</Label>
+                                       <Image avatar src={`/images/${m.user}.jpeg`} size="mini" spaced='left'/>
                                    </Form.Field> : <Form.Field inline>
-                                       <Image avatar src={`/images/${m.user}.jpg`} size="mini" spaced='left'/>
-                                       <Label pointing={position}>{m.message}</Label>
+                                       <Image avatar src={`/images/${m.user}.jpeg`} size="mini" spaced='left'/>
+                                       <Label size="massive" pointing={position}>{m.message}</Label>
                                    </Form.Field>
                                }
 

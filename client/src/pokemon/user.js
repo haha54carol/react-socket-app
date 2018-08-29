@@ -25,18 +25,18 @@ class UserComp extends Component {
                     <Modal.Header>Select a Role.</Modal.Header>
                     <Modal.Content>
                         {users.map(userName =>
-                            <span key={`key_${userName}`}
-                                      style={{marginRight: 10}}
+                            <div key={`key_${userName}`}
+                                      style={{marginRight: 10, display: 'inline-block', marginBottom: 10}}
                                       onClick={() => {
                                         if(pokemons[userName]){
                                             this.setState({user: userName})
                                       }
                                 }}>
-                                    <Label className={pokemons[userName] ? null : 'inactiveLabel'} color={user === userName ? 'red': null} image>
-                                        <img src={`/images/${userName}.jpg`} alt={userName}/>
+                                    <Label size="big" className={pokemons[userName] ? null : 'inactiveLabel'} color={user === userName ? 'red': null} image>
+                                        <img src={`/images/${userName}.jpeg`} alt={userName}/>
                                         {userName}
                                     </Label>
-                                </span>
+                                </div>
                         )}
                     </Modal.Content>
                     <Modal.Actions>
