@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SocketHOC from '../hoc/socketHOC'
 import { connect } from 'react-redux'
-import {Label, Icon,  Image, Input, Container, Grid} from 'semantic-ui-react'
+import {Label, Form,  Image, Input, Container, Grid} from 'semantic-ui-react'
 
 const MessageInputBox = ({onEnter}) =>{
     return(
@@ -51,21 +51,29 @@ class ChatRoomComp extends Component{
         const {user:selectedUser}= this.props
         return(
             <Container fluid>
-        <Grid>
-                {messages.map((m, idx) =>{
-                   return (
-                       <Grid.Row columns="1">
-                       <Grid.Column
-                       floated={`${selectedUser === m.user ? "right": "left"}`}
-                       textAlign={`${selectedUser === m.user ? "right": "left"}`}>
-                           {m.user}:{m.message}
-                                {/*<Image src={`/images/${m.user}.jpg`} size="mini"/>*/}
+                <Grid>
+                    {messages.map((m, idx) =>{
+                        const position = selectedUser === m.user ? "right": "left"
+                       return (
+                           <Grid.Row columns="1" key={`m_${idx}`}>
+                           <Grid.Column
+                           floated={position}
+                           textAlign={position}>
+                               {
+                                   position === 'right' ? <Form.Field inline>
+                                       <Label pointing={position}>{m.message}</Label>
+                                       <Image avatar src={`/images/${m.user}.jpg`} size="mini" spaced='left'/>
+                                   </Form.Field> : <Form.Field inline>
+                                       <Image avatar src={`/images/${m.user}.jpg`} size="mini" spaced='left'/>
+                                       <Label pointing={position}>{m.message}</Label>
+                                   </Form.Field>
+                               }
 
-                        </Grid.Column>
-                        </Grid.Row>
-                   )
-                   
-                })}
+                            </Grid.Column>
+                            </Grid.Row>
+                       )
+
+                    })}
                 </Grid>
                 <MessageInputBox onEnter={this.onEnter} />
             </Container>

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import SocketHOC from '../hoc/socketHOC'
 import {connect} from 'react-redux'
 import action from '../actions/action'
-import {Label, Modal, Button, Grid, Segment } from 'semantic-ui-react'
+import {Label, Modal, Button } from 'semantic-ui-react'
 
 class UserComp extends Component {
     constructor(props) {
@@ -33,7 +33,7 @@ class UserComp extends Component {
                                       }
                                 }}>
                                     <Label className={pokemons[userName] ? null : 'inactiveLabel'} color={user === userName ? 'red': null} image>
-                                        <img src={`/images/${userName}.jpg`}/>
+                                        <img src={`/images/${userName}.jpg`} alt={userName}/>
                                         {userName}
                                     </Label>
                                 </span>
