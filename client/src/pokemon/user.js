@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import SocketHOC from '../hoc/socketHOC'
 import {connect} from 'react-redux'
 import action from '../actions/action'
-import {Label, Modal, Button } from 'semantic-ui-react'
+import {Label, Modal, Button} from 'semantic-ui-react'
 
 class UserComp extends Component {
     constructor(props) {
@@ -20,10 +20,9 @@ class UserComp extends Component {
 
 
         return (
-            <div>
-                <Modal open={showModal}>
+                <Modal style={{height: 150}} open={showModal}>
                     <Modal.Header>Select a Role.</Modal.Header>
-                    <Modal.Content>
+                    <Modal.Content >
                         {users.map(userName =>
                             <div key={`key_${userName}`}
                                       style={{marginRight: 10, display: 'inline-block', marginBottom: 10}}
@@ -49,8 +48,7 @@ class UserComp extends Component {
                                 })}
                             }}>Start To Chat!</Button>
                     </Modal.Actions>
-                </Modal>
-            </div>
+                </Modal> 
         )
     }
 }
